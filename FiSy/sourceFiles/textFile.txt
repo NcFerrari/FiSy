@@ -1,0 +1,4 @@
+Nějaký text (včetně kódování)
+Ale přidáváme řádky, aby jich bylo víc.
+Toto by mohl být poslední řádek...
+... ale není :)

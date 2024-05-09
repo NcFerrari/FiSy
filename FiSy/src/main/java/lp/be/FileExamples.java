@@ -172,4 +172,40 @@ public class FileExamples {
             }
         }
     }
+
+    public void loadTextFile() {
+    }
+
+    public void loadExcelFile() {
+    }
+
+    public void loadJPGFile() {
+    }
+
+    public void loadJSONFile() {
+    }
+
+    public void loadPDFFile() {
+    }
+
+    public void loadPNGFile() {
+    }
+
+    public void loadPropertiesFile() {
+    }
+
+    public void useSQLFile() {
+    }
+
+    public void loadCSVFile() {
+    }
+
+    public void loadWordFile() {
+    }
+
+    public void loadXMLFile() {
+    }
+
+    public void loadYAMLFile() {
+    }
 }
