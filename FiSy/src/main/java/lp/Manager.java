@@ -12,17 +12,17 @@ public class Manager {
 
     private void loadingFiles() {
         fileExamples.loadTextFile();
+        fileExamples.loadPropertiesFile();
+        fileExamples.loadCSVFile();
+        fileExamples.loadXMLFile();
+        fileExamples.loadJSONFile();
+        fileExamples.loadYAMLFile();
+        fileExamples.loadPDFFile();
+        fileExamples.useSQLFile();
+        fileExamples.loadWordFile();
         fileExamples.loadExcelFile();
         fileExamples.loadJPGFile();
-        fileExamples.loadJSONFile();
-        fileExamples.loadPDFFile();
         fileExamples.loadPNGFile();
-        fileExamples.loadPropertiesFile();
-        fileExamples.useSQLFile();
-        fileExamples.loadCSVFile();
-        fileExamples.loadWordFile();
-        fileExamples.loadXMLFile();
-        fileExamples.loadYAMLFile();
     }
 
     private void crudFile() {

@@ -174,38 +174,62 @@ public class FileExamples {
     }
 
     public void loadTextFile() {
-    }
-
-    public void loadExcelFile() {
-    }
-
-    public void loadJPGFile() {
-    }
-
-    public void loadJSONFile() {
-    }
-
-    public void loadPDFFile() {
-    }
-
-    public void loadPNGFile() {
+        log.info("LOADING TEXT FILE");
+        log.info("============================");
     }
 
     public void loadPropertiesFile() {
-    }
-
-    public void useSQLFile() {
+        log.info("LOADING PROPERTIES FILE");
+        log.info("============================");
     }
 
     public void loadCSVFile() {
-    }
-
-    public void loadWordFile() {
+        log.info("LOADING CSV FILE");
+        log.info("============================");
     }
 
     public void loadXMLFile() {
+        log.info("LOADING XML FILE");
+        log.info("============================");
+    }
+
+    public void loadJSONFile() {
+        log.info("LOADING JSON FILE");
+        log.info("============================");
     }
 
     public void loadYAMLFile() {
+        log.info("LOADING  FILE");
+        log.info("============================");
+    }
+
+    public void loadPDFFile() {
+        log.info("LOADING PDF FILE");
+        log.info("============================");
+    }
+
+    public void useSQLFile() {
+        log.info("USE SQL FILE");
+        log.info("============================");
+    }
+
+    public void loadWordFile() {
+        log.info("LOADING WORD FILE");
+        log.info("============================");
+    }
+
+    public void loadExcelFile() {
+        log.info("LOADING EXCEL FILE");
+        log.info("============================");
+    }
+
+    public void loadJPGFile() {
+        log.info("LOADING JPEG");
+        log.info("============================");
+    }
+
+    public void loadPNGFile() {
+        log.info("LOADING PNG");
+        log.info("============================");
     }
 }
