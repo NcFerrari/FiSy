@@ -5,7 +5,13 @@ import lp.be.serviceimpl.LoggerServiceImpl;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -175,6 +181,18 @@ public class FileExamples {
 
     public void loadTextFile() {
         log.info("LOADING TEXT FILE");
+        try {
+            File file = new File("sourceFiles/textFile.txt");
+            FileReader fileReader = new FileReader(file);
+            int character = 0;
+            while ((character = fileReader.read()) > -1) {
+                log.info("{}: {}", character, (char) character);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         log.info("============================");
     }
 
