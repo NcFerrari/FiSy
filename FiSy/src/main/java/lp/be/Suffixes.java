@@ -6,7 +6,19 @@ import lombok.Getter;
 public enum Suffixes {
 
     PROPERTIES(".properties"),
-    TXT(".txt");
+    TXT(".txt"),
+    CSV(".csv"),
+    JAVA(".java"),
+    JSON(".json"),
+    XLSX(".xlsx"),
+    PDF(".pdf"),
+    PNG(".png"),
+    JPEG(".jpeg"),
+    SQL(".sql"),
+    DOCX(".docx"),
+    XML(".xml"),
+    YAML(".yaml"),
+    HTML(".html");
 
     private final String suffix;
 

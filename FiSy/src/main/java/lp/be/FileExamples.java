@@ -4,6 +4,9 @@ import lp.be.service.LoggerService;
 import lp.be.serviceimpl.LoggerServiceImpl;
 import org.apache.logging.log4j.Logger;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FileExamples {
@@ -179,20 +183,16 @@ public class FileExamples {
         }
     }
 
-    public void loadTextFile() {
+    public void loadTextFile() throws IOException {
         log.info("LOADING TEXT FILE");
-        try {
-            File file = new File("sourceFiles/textFile.txt");
-            FileReader fileReader = new FileReader(file);
-            int character = 0;
-            while ((character = fileReader.read()) > -1) {
-                log.info("{}: {}", character, (char) character);
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        File file = new File("sourceFiles/textFile.txt");
+        log.info(getFileContentByFileReader(file));
+        log.info(getFileContentByBufferedReaderCharByChar(file));
+        log.info(getFileContentByBufferedReaderLineByLine(file));
+        log.info(getFileContentByBufferedReaderLineByLineBetterSyntax(file));
+        log.info(getFileContentByBufferedReaderLineByLineTheBestSyntax(file));
+        log.info(getStringContentByInputStream("nějaký náhodný text, který\nje teď odřádkován"));
+        log.info(getStringContentByInputStream(new FileInputStream(file)));
         log.info("============================");
     }
 
@@ -249,5 +249,87 @@ public class FileExamples {
     public void loadPNGFile() {
         log.info("LOADING PNG");
         log.info("============================");
+    }
+
+    /**
+     * ZNAK PO ZNAKU
+     *
+     * @param file
+     * @return
+     * @throws FileNotFoundException
+     */
+    private String getFileContentByFileReader(File file) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        Reader fileReader = new FileReader(file);
+        int character;
+        while ((character = fileReader.read()) > -1) {
+            stringBuilder.append((char) character);
+        }
+        fileReader.close();
+        return stringBuilder.toString();
+    }
+
+    private String getFileContentByBufferedReaderCharByChar(File file) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        int character;
+        while ((character = bufferedReader.read()) > -1) {
+            stringBuilder.append((char) character);
+        }
+        bufferedReader.close();
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Řádek po řádku (znakově)
+     *
+     * @param file
+     * @return
+     */
+    private String getFileContentByBufferedReaderLineByLine(File file) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            stringBuilder.append(line).append("\n");
+        }
+        bufferedReader.close();
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        return stringBuilder.toString();
+    }
+
+    private String getFileContentByBufferedReaderLineByLineBetterSyntax(File file) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        bufferedReader.lines().forEach(line -> stringBuilder.append(line).append("\n"));
+        bufferedReader.close();
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        return stringBuilder.toString();
+    }
+
+    /**
+     * By source try-catch block the method close() is automatically called
+     *
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    private String getFileContentByBufferedReaderLineByLineTheBestSyntax(File file) throws IOException {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+            return bufferedReader.lines().collect(Collectors.joining(System.lineSeparator()));
+        }
+    }
+
+    private String getStringContentByInputStream(String text) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(text.getBytes())))) {
+            return reader.lines().collect(Collectors.joining(System.lineSeparator()));
+        }
+    }
+
+    private String getStringContentByInputStream(InputStream inputStream) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            return reader.lines().collect(Collectors.joining(System.lineSeparator()));
+        }
     }
 }
