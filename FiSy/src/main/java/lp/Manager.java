@@ -38,8 +38,8 @@ public class Manager {
     }
 
     private void loadingFiles() throws IOException {
-        fileExamples.loadTextFile();
-//        fileExamples.loadPropertiesFile();
+//        fileExamples.loadTextFile();
+        fileExamples.loadPropertiesFile();
 //        fileExamples.loadCSVFile();
 //        fileExamples.loadXMLFile();
 //        fileExamples.loadJSONFile();

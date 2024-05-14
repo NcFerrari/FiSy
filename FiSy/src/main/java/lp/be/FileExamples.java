@@ -4,6 +4,7 @@ import lp.be.service.LoggerService;
 import lp.be.serviceimpl.LoggerServiceImpl;
 import org.apache.logging.log4j.Logger;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -14,10 +15,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -26,6 +29,7 @@ public class FileExamples {
     private static final String SEPARATOR = "============================";
     private static final String CREATED_OUTPUT_TEXT = "{} successful created";
     private static final String DELETED_OUTPUT_TEXT = "{} successful created";
+    private static final String ROOT = "sourceFiles/";
     private static final String FILE_NAME = "TestingFile";
     private static final String DIRECTORY_NAME = "TestingDir";
     private static final String DIRECTORIES = "a/b/c";
@@ -197,15 +201,27 @@ public class FileExamples {
     public void loadTextFile() throws IOException {
         log.info("LOADING TEXT FILE");
         String textFromFile;
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("sourceFiles/textFile.txt"))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(ROOT + "textFile" + Suffixes.TXT.getSuffix()))) {
             textFromFile = bufferedReader.lines().collect(Collectors.joining(System.lineSeparator()));
         }
         log.info(textFromFile);
         log.info(SEPARATOR);
     }
 
-    public void loadPropertiesFile() {
+    public void loadPropertiesFile() throws IOException {
         log.info("LOADING PROPERTIES FILE");
+        Properties properties = new Properties();
+        try (Reader r = new BufferedReader(new FileReader(ROOT + "propertiesFile" + Suffixes.PROPERTIES.getSuffix()))) {
+            properties.load(r);
+        }
+        // druhý možný zápis přes input stream
+//        try (InputStream is = new FileInputStream(ROOT + "propertiesFile" + Suffixes.PROPERTIES.getSuffix())) {
+//            properties.load(is);
+//        }
+        String user = properties.getProperty("db.user");
+        log.info(user);
+        String password = properties.getProperty("db.password");
+        log.info(password);
         log.info(SEPARATOR);
     }
 
