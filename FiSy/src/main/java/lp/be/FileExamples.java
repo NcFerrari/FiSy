@@ -4,7 +4,6 @@ import lp.be.service.LoggerService;
 import lp.be.serviceimpl.LoggerServiceImpl;
 import org.apache.logging.log4j.Logger;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -24,6 +23,7 @@ import java.util.stream.Stream;
 
 public class FileExamples {
 
+    private static final String SEPARATOR = "============================";
     private static final String CREATED_OUTPUT_TEXT = "{} successful created";
     private static final String DELETED_OUTPUT_TEXT = "{} successful created";
     private static final String FILE_NAME = "TestingFile";
@@ -196,63 +196,67 @@ public class FileExamples {
 
     public void loadTextFile() throws IOException {
         log.info("LOADING TEXT FILE");
-
-        log.info("============================");
+        String textFromFile;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("sourceFiles/textFile.txt"))) {
+            textFromFile = bufferedReader.lines().collect(Collectors.joining(System.lineSeparator()));
+        }
+        log.info(textFromFile);
+        log.info(SEPARATOR);
     }
 
     public void loadPropertiesFile() {
         log.info("LOADING PROPERTIES FILE");
-        log.info("============================");
+        log.info(SEPARATOR);
     }
 
     public void loadCSVFile() {
         log.info("LOADING CSV FILE");
-        log.info("============================");
+        log.info(SEPARATOR);
     }
 
     public void loadXMLFile() {
         log.info("LOADING XML FILE");
-        log.info("============================");
+        log.info(SEPARATOR);
     }
 
     public void loadJSONFile() {
         log.info("LOADING JSON FILE");
-        log.info("============================");
+        log.info(SEPARATOR);
     }
 
     public void loadYAMLFile() {
         log.info("LOADING  FILE");
-        log.info("============================");
+        log.info(SEPARATOR);
     }
 
     public void loadPDFFile() {
         log.info("LOADING PDF FILE");
-        log.info("============================");
+        log.info(SEPARATOR);
     }
 
     public void useSQLFile() {
         log.info("USE SQL FILE");
-        log.info("============================");
+        log.info(SEPARATOR);
     }
 
     public void loadWordFile() {
         log.info("LOADING WORD FILE");
-        log.info("============================");
+        log.info(SEPARATOR);
     }
 
     public void loadExcelFile() {
         log.info("LOADING EXCEL FILE");
-        log.info("============================");
+        log.info(SEPARATOR);
     }
 
     public void loadJPGFile() {
         log.info("LOADING JPEG");
-        log.info("============================");
+        log.info(SEPARATOR);
     }
 
     public void loadPNGFile() {
         log.info("LOADING PNG");
-        log.info("============================");
+        log.info(SEPARATOR);
     }
 
     /**
