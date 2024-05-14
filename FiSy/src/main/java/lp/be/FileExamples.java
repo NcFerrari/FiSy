@@ -1,10 +1,11 @@
 package lp.be;
 
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import lp.be.service.LoggerService;
 import lp.be.serviceimpl.LoggerServiceImpl;
 import org.apache.logging.log4j.Logger;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -15,11 +16,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -225,8 +228,26 @@ public class FileExamples {
         log.info(SEPARATOR);
     }
 
-    public void loadCSVFile() {
+    /**
+     * used 3rd party side library (com.opencsv:opencsv)
+     *
+     * @throws IOException
+     */
+    public void loadCSVFile() throws IOException {
         log.info("LOADING CSV FILE");
+        List<List<String>> records = new ArrayList<>();
+        try (CSVReader csvReader = new CSVReader(new FileReader(ROOT + "csvFile" + Suffixes.CSV.getSuffix()))) {
+            String[] values;
+            while ((values = csvReader.readNext()) != null) {
+                records.add(Arrays.asList(values));
+            }
+        } catch (CsvValidationException e) {
+            log.error(e);
+            for (StackTraceElement ste : e.getStackTrace()) {
+                log.error(ste);
+            }
+        }
+        records.forEach(lines -> log.info(lines.stream().collect(Collectors.joining())));
         log.info(SEPARATOR);
     }
 

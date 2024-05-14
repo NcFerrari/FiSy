@@ -39,8 +39,8 @@ public class Manager {
 
     private void loadingFiles() throws IOException {
 //        fileExamples.loadTextFile();
-        fileExamples.loadPropertiesFile();
-//        fileExamples.loadCSVFile();
+//        fileExamples.loadPropertiesFile();
+        fileExamples.loadCSVFile();
 //        fileExamples.loadXMLFile();
 //        fileExamples.loadJSONFile();
 //        fileExamples.loadYAMLFile();
