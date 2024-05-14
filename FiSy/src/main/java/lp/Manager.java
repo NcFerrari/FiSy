@@ -1,11 +1,15 @@
 package lp;
 
+import lp.be.ExampleClass;
 import lp.be.FileExamples;
 import lp.be.service.LoggerService;
 import lp.be.serviceimpl.LoggerServiceImpl;
 import org.apache.logging.log4j.Logger;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 
 public class Manager {
     private final FileExamples fileExamples = new FileExamples();
@@ -14,8 +18,8 @@ public class Manager {
 
     public Manager() {
         log.info("STARTED");
-//        crudFile();
         try {
+//            crudFile();
             loadingFiles();
         } catch (IOException e) {
             log.error(e);
@@ -23,6 +27,14 @@ public class Manager {
                 log.error(ste);
             }
         }
+//        try {
+//            new ExampleClass();
+//        } catch (URISyntaxException | IOException e) {
+//            log.error(e);
+//            for (StackTraceElement ste : e.getStackTrace()) {
+//                log.error(ste);
+//            }
+//        }
     }
 
     private void loadingFiles() throws IOException {

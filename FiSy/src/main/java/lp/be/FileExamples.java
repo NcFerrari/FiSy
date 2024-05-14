@@ -183,8 +183,7 @@ public class FileExamples {
         }
     }
 
-    public void loadTextFile() throws IOException {
-        log.info("LOADING TEXT FILE");
+    public void possibleLoadings() throws IOException {
         File file = new File("sourceFiles/textFile.txt");
         log.info(getFileContentByFileReader(file));
         log.info(getFileContentByBufferedReaderCharByChar(file));
@@ -193,6 +192,11 @@ public class FileExamples {
         log.info(getFileContentByBufferedReaderLineByLineTheBestSyntax(file));
         log.info(getStringContentByInputStream("nějaký náhodný text, který\nje teď odřádkován"));
         log.info(getStringContentByInputStream(new FileInputStream(file)));
+    }
+
+    public void loadTextFile() throws IOException {
+        log.info("LOADING TEXT FILE");
+
         log.info("============================");
     }
 
